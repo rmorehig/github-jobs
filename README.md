@@ -1,6 +1,6 @@
 # Github Jobs
 
-Job Searh app using Github API: https://jobs.github.com/api
+Job search app using Github API: https://jobs.github.com/api
 
 - User story: I can see a list of jobs in a city by default
 - User story: I can search for jobs with a given keyword

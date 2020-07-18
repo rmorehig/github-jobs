@@ -12,8 +12,10 @@ html {
 }
 
 body {
-  margin: 0;
+  background: #f6f7fb;
+  color: #334680;
   font-family: 'Roboto', sans-serif;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,7 +30,23 @@ button {
   outline: none;
 }
 
-input {
+input[type='text'] {
   border: none;
   outline: none;
+}
+
+input[type='text']::placeholder {
+  color: #b9bdcf;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+input[type='checkbox'] {
+  height: 18px;
+  margin-right: 12px;
+  width: 18px;
+}
+
+label {
+  font-family: 'Poppins', sans-serif;
 }

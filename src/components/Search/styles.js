@@ -41,9 +41,4 @@ export const Input = styled.input`
   padding-left: 40px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  &::placeholder {
-    color: #b9bdcf;
-    font-size: 12px;
-    line-height: 14px;
-  }
 `

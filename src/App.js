@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Search from 'components/Search'
-import Filters from 'components/Filters'
+import Home from 'pages/Home'
 
 const Logo = styled.a`
   color: #282538;
@@ -21,8 +20,7 @@ function App() {
       <Logo href="/">
         <span>Github</span> Jobs
       </Logo>
-      <Search />
-      <Filters />
+      <Home />
     </AppWrapper>
   )
 }

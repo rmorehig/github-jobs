@@ -3,10 +3,10 @@ import { Background, Button, Form, Input } from './styles'
 import BriefcaseIcon from 'components/BriefcaseIcon'
 
 const Search = () => {
-  const [search, setSearch] = useState('')
+  const [description, setDescription] = useState('')
 
   const handleChange = event => {
-    setSearch(event.target.value)
+    setDescription(event.target.value)
   }
 
   const handleSubmit = event => {
@@ -18,10 +18,13 @@ const Search = () => {
       <Form onSubmit={handleSubmit}>
         <BriefcaseIcon />
         <Input
+          id="description"
           onChange={handleChange}
           placeholder="Title, companies, expertise or benefits"
-          value={search}
+          type="text"
+          value={description}
         />
+
         <Button type="submit">Search</Button>
       </Form>
     </Background>
