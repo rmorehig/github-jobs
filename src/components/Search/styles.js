@@ -32,6 +32,13 @@ export const Form = styled.form`
   padding: 4px 5px;
   position: relative;
   width: 100%;
+  .material-icons {
+    color: #b9bdcf;
+    font-size: 18px;
+    left: 18px;
+    position: absolute;
+    top: 18px;
+  }
 `
 
 export const Input = styled.input`

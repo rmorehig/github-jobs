@@ -26,6 +26,7 @@ export const Location = styled.div`
   display: flex;
   .material-icons {
     margin-right: 7.5px;
+    font-size: 18px;
   }
 `
 

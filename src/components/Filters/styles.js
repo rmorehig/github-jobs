@@ -12,14 +12,24 @@ export const Container = styled.div`
   margin: 25px 0;
   padding: 0 7px;
 `
-export const Input = styled.input`
+export const Input = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   display: block;
   margin-top: 14px;
-  padding: 12px 15px;
+  padding: 15px 12px 15px 45px;
+  position: relative;
   width: 100%;
+  .material-icons {
+    font-size: 18px;
+    left: 12px;
+    position: absolute;
+    top: 16px;
+  }
+  input {
+    width: 100%;
+  }
 `
 
 export const InputLabel = styled.label`

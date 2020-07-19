@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Background, Button, Form, Input } from './styles'
-import BriefcaseIcon from 'components/BriefcaseIcon'
 
 const Search = () => {
   const [description, setDescription] = useState('')
@@ -16,7 +15,7 @@ const Search = () => {
   return (
     <Background>
       <Form onSubmit={handleSubmit}>
-        <BriefcaseIcon />
+        <span className="material-icons">work_outline</span>
         <Input
           id="description"
           onChange={handleChange}

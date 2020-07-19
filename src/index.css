@@ -32,6 +32,8 @@ button {
 
 input[type='text'] {
   border: none;
+  color: #334680;
+  font-family: 'Poppins', sans-serif;
   outline: none;
 }
 

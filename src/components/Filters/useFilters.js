@@ -1,14 +1,15 @@
-import { useCallback, useReducer } from 'react'
+import { useCallback, useReducer, useEffect } from 'react'
+import { useLocation } from 'wouter'
 
 const ACTIONS = {
+  SET_CITY: 'SET_CITY',
   SET_FULL_TIME: 'SET_FULL_TIME',
-  SET_LOCATION: 'SET_LOCATION',
-  SET_CURRENT_CITY: 'SET_CURRENT_CITY'
+  SET_LOCATION: 'SET_LOCATION'
 }
 const cities = ['London', 'Amsterdam', 'New York', 'Berlin']
 
 const initialState = {
-  currentCity: null,
+  currentCity: '',
   fullTime: false,
   location: ''
 }
@@ -16,11 +17,10 @@ const reducer = (state, { type, payload }) => {
   switch (type) {
     case ACTIONS.SET_FULL_TIME:
       return { ...state, fullTime: payload.fullTime }
-
     case ACTIONS.SET_LOCATION:
-      return { ...state, location: payload.value }
-    case ACTIONS.SET_CURRENT_CITY:
-      return { ...state, currentCity: payload.city }
+      return { ...state, location: payload.location, city: '' }
+    case ACTIONS.SET_CITY:
+      return { ...state, city: payload.city, location: '' }
     default: {
       return state
     }
@@ -28,7 +28,8 @@ const reducer = (state, { type, payload }) => {
 }
 
 export default function useFilters() {
-  const [{ currentCity, fullTime, location }, dispatch] = useReducer(
+  const [, pushLocation] = useLocation()
+  const [{ city, fullTime, location }, dispatch] = useReducer(
     reducer,
     initialState
   )
@@ -56,19 +57,36 @@ export default function useFilters() {
   const handleChangeCity = useCallback(
     event => {
       dispatch({
-        type: ACTIONS.SET_CURRENT_CITY,
-        payload: { city: event.target.checked && event.target.name }
+        type: ACTIONS.SET_CITY,
+        payload: { city: event.target.checked ? event.target.name : '' }
       })
     },
     [dispatch]
   )
+  const handleSubmit = event => {
+    event.preventDefault()
+  }
+
+  useEffect(() => {
+    if (city || fullTime || location) {
+      pushLocation(
+        `/search?${fullTime ? `full_time=${fullTime}` : ''}${
+          location || city
+            ? `${fullTime ? '&' : ''}location=${location || city}`
+            : ''
+        }`
+      )
+    }
+  }, [city, fullTime, location, pushLocation])
+
   return {
     cities,
-    currentCity,
+    city,
     fullTime,
     location,
     handleChangeCity,
     handleChangeFullTime,
-    handleChangeLocation
+    handleChangeLocation,
+    handleSubmit
   }
 }

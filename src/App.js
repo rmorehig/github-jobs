@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link, Route, Switch } from 'wouter'
 import styled from 'styled-components'
 import Home from 'pages/Home'
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   color: #282538;
   font-family: Poppins;
   font-size: 24px;
@@ -17,10 +18,13 @@ const AppWrapper = styled.div`
 function App() {
   return (
     <AppWrapper>
-      <Logo href="/">
+      <Logo to="/">
         <span>Github</span> Jobs
       </Logo>
-      <Home />
+      <Switch>
+        <Route component={Home} path="/" />
+        <Route component={Home} path="/search" />
+      </Switch>
     </AppWrapper>
   )
 }

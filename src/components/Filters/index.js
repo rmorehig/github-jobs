@@ -5,46 +5,52 @@ import useFilters from './useFilters'
 const Filters = () => {
   const {
     cities,
-    currentCity,
+    city: currentCity,
     fullTime,
     location,
     handleChangeCity,
     handleChangeFullTime,
-    handleChangeLocation
+    handleChangeLocation,
+    handleSubmit
   } = useFilters()
 
   return (
     <Wrapper>
-      <CheckboxLabel>
-        <input
-          checked={fullTime}
-          onChange={handleChangeFullTime}
-          type="checkbox"
-        />
-        Full time
-      </CheckboxLabel>
-      <InputLabel>
-        Location
-        <Input
-          onChange={handleChangeLocation}
-          placeholder="City, state, zip code or country"
-          type="text"
-          value={location}
-        />
-      </InputLabel>
-      <Container>
-        {cities.map(city => (
-          <CheckboxLabel key={city}>
+      <form onSubmit={handleSubmit}>
+        <CheckboxLabel>
+          <input
+            checked={fullTime}
+            onChange={handleChangeFullTime}
+            type="checkbox"
+          />
+          Full time
+        </CheckboxLabel>
+        <InputLabel>
+          Location
+          <Input>
+            <span className="material-icons">public</span>
             <input
-              checked={city === currentCity}
-              name={city}
-              onChange={handleChangeCity}
-              type="checkbox"
+              onChange={handleChangeLocation}
+              placeholder="City, state, zip code or country"
+              type="text"
+              value={location}
             />
-            {city}
-          </CheckboxLabel>
-        ))}
-      </Container>
+          </Input>
+        </InputLabel>
+        <Container>
+          {cities.map(city => (
+            <CheckboxLabel key={city}>
+              <input
+                checked={city === currentCity}
+                name={city}
+                onChange={handleChangeCity}
+                type="checkbox"
+              />
+              {city}
+            </CheckboxLabel>
+          ))}
+        </Container>
+      </form>
     </Wrapper>
   )
 }
