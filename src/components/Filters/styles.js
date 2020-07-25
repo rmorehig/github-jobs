@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const CheckboxLabel = styled.label`
   align-items: center;
@@ -7,11 +7,11 @@ export const CheckboxLabel = styled.label`
   font-size: 14px;
   line-height: 21px;
   margin-top: 16px;
-`
+`;
 export const Container = styled.div`
   margin: 25px 0;
   padding: 0 7px;
-`
+`;
 export const Input = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
@@ -30,7 +30,7 @@ export const Input = styled.div`
   input {
     width: 100%;
   }
-`
+`;
 
 export const InputLabel = styled.label`
   color: #b9bdcf;
@@ -40,6 +40,6 @@ export const InputLabel = styled.label`
   line-height: 21px;
   margin-top: 32px;
   text-transform: uppercase;
-`
+`;
 
-export const Wrapper = styled.div``
+export const FiltersWrapper = styled.div``;

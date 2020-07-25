@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link, Route, Switch } from 'wouter'
-import styled from 'styled-components'
-import Home from 'pages/Home'
+import React from "react";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
+import Home from "pages/Home";
+import { SearchProvider } from "context/SearchContext";
 
 const Logo = styled(Link)`
   color: #282538;
@@ -11,22 +12,28 @@ const Logo = styled(Link)`
   span {
     font-weight: bold;
   }
-`
+`;
 const AppWrapper = styled.div`
   padding: 12px;
-`
+`;
+
 function App() {
   return (
     <AppWrapper>
-      <Logo to="/">
-        <span>Github</span> Jobs
-      </Logo>
-      <Switch>
-        <Route component={Home} path="/" />
-        <Route component={Home} path="/search" />
-      </Switch>
+      <Router>
+        <SearchProvider>
+          <Logo to="/">
+            <span>Github</span> Jobs
+          </Logo>
+          <Switch>
+            <Route exact path={["/", "/search"]}>
+              <Home />
+            </Route>
+          </Switch>
+        </SearchProvider>
+      </Router>
     </AppWrapper>
-  )
+  );
 }
 
-export default App
+export default App;

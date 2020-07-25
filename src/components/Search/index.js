@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import { Background, Button, Form, Input } from './styles'
+import React, { useCallback } from "react";
+import { Background, Button, Form, Input } from "./styles";
+import { useSearch } from "context/SearchContext";
 
 const Search = () => {
-  const [description, setDescription] = useState('')
+  const { description, setDescription, updateSearch } = useSearch();
 
-  const handleChange = event => {
-    setDescription(event.target.value)
-  }
-
-  const handleSubmit = event => {
-    event.preventDefault()
-  }
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      updateSearch();
+    },
+    [updateSearch]
+  );
 
   return (
     <Background>
@@ -18,16 +19,15 @@ const Search = () => {
         <span className="material-icons">work_outline</span>
         <Input
           id="description"
-          onChange={handleChange}
+          onChange={setDescription}
           placeholder="Title, companies, expertise or benefits"
           type="text"
           value={description}
         />
-
         <Button type="submit">Search</Button>
       </Form>
     </Background>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

@@ -1,6 +1,12 @@
-import React from 'react'
-import { CheckboxLabel, Container, Input, InputLabel, Wrapper } from './styles'
-import useFilters from './useFilters'
+import React from "react";
+import {
+  CheckboxLabel,
+  Container,
+  FiltersWrapper,
+  Input,
+  InputLabel,
+} from "./styles";
+import useFilters from "./useFilters";
 
 const Filters = () => {
   const {
@@ -11,11 +17,11 @@ const Filters = () => {
     handleChangeCity,
     handleChangeFullTime,
     handleChangeLocation,
-    handleSubmit
-  } = useFilters()
+    handleSubmit,
+  } = useFilters();
 
   return (
-    <Wrapper>
+    <FiltersWrapper>
       <form onSubmit={handleSubmit}>
         <CheckboxLabel>
           <input
@@ -38,7 +44,7 @@ const Filters = () => {
           </Input>
         </InputLabel>
         <Container>
-          {cities.map(city => (
+          {cities.map((city) => (
             <CheckboxLabel key={city}>
               <input
                 checked={city === currentCity}
@@ -51,8 +57,8 @@ const Filters = () => {
           ))}
         </Container>
       </form>
-    </Wrapper>
-  )
-}
+    </FiltersWrapper>
+  );
+};
 
-export default Filters
+export default Filters;

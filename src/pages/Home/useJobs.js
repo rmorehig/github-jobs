@@ -1,26 +1,25 @@
-import { useState, useEffect } from 'react'
-import getJobs from 'services/getJobs'
-import { getParam } from 'utils/navigation'
+import { useState, useEffect } from "react";
+import getJobs from "services/getJobs";
+import { useLocation } from "react-router-dom";
 
-function useJobs({ description, location }) {
-  const [jobs, setJobs] = useState()
-  const [status, setStatus] = useState('idle')
+function useJobs() {
+  const [jobs, setJobs] = useState();
+  const [status, setStatus] = useState("idle");
+  const { search } = useLocation();
 
   useEffect(() => {
-    const description = getParam('description')
-    const fullTime = getParam('fullTime')
-    const location = getParam('location')
-    setStatus('pending')
-    getJobs({ description, fullTime, location }).then(jobs => {
-      setJobs(jobs)
-      setStatus('success')
-    })
-  }, [description, location, setJobs, setStatus])
+    const query = new URLSearchParams(search).toString();
+    setStatus("loading");
+    getJobs({ query }).then((jobs) => {
+      setJobs(jobs);
+      setStatus("success");
+    });
+  }, [search, setJobs, setStatus]);
 
   return {
     jobs,
-    status
-  }
+    status,
+  };
 }
 
-export default useJobs
+export default useJobs;
