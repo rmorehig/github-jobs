@@ -11,15 +11,12 @@ import useFilters from "./useFilters";
 const Filters = () => {
   const {
     cities,
-    city: currentCity,
-    fullTime,
-    location,
-    handleChangeCity,
     handleChangeFullTime,
     handleChangeLocation,
     handleSubmit,
+    fullTime,
+    location,
   } = useFilters();
-
   return (
     <FiltersWrapper>
       <form onSubmit={handleSubmit}>
@@ -47,9 +44,9 @@ const Filters = () => {
           {cities.map((city) => (
             <CheckboxLabel key={city}>
               <input
-                checked={city === currentCity}
+                checked={city === location}
                 name={city}
-                onChange={handleChangeCity}
+                onChange={handleChangeLocation}
                 type="checkbox"
               />
               {city}

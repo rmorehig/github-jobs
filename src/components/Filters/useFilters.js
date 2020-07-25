@@ -1,93 +1,49 @@
-import { useCallback, useReducer, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-
-const ACTIONS = {
-  SET_CITY: "SET_CITY",
-  SET_FULL_TIME: "SET_FULL_TIME",
-  SET_LOCATION: "SET_LOCATION",
-};
-const cities = ["London", "Amsterdam", "New York", "Berlin"];
-
-const reducer = (state, { type, payload }) => {
-  switch (type) {
-    case ACTIONS.SET_FULL_TIME:
-      return { ...state, fullTime: payload.fullTime };
-    case ACTIONS.SET_LOCATION:
-      return { ...state, location: payload.location, city: "" };
-    case ACTIONS.SET_CITY:
-      return { ...state, city: payload.city, location: "" };
-    default: {
-      return state;
-    }
-  }
-};
+import { useEffect, useCallback } from "react";
+import { useSearch } from "context/search";
 
 export default function useFilters() {
-  const { search } = useLocation();
-  const initialState = {
-    currentCity: "",
-    fullTime: new URLSearchParams(search).get("full_time") || false,
-    location: new URLSearchParams(search).get("location") || "",
-  };
-  const { push } = useHistory();
-  const [{ city, fullTime, location }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
-
+  const {
+    cities,
+    params,
+    setFullTime,
+    setLocation,
+    updateSearch,
+  } = useSearch();
+  const { fullTime, location } = params;
   const handleChangeFullTime = useCallback(
     (event) => {
-      dispatch({
-        type: ACTIONS.SET_FULL_TIME,
-        payload: { fullTime: event.target.checked },
-      });
+      setFullTime(event.target.checked);
     },
-    [dispatch]
+    [setFullTime]
   );
 
   const handleChangeLocation = useCallback(
     (event) => {
-      dispatch({
-        type: ACTIONS.SET_LOCATION,
-        payload: { location: event.target.value },
-      });
+      setLocation(event.target.value);
     },
-    [dispatch]
+    [setLocation]
   );
 
-  const handleChangeCity = useCallback(
+  const handleSubmit = useCallback(
     (event) => {
-      dispatch({
-        type: ACTIONS.SET_CITY,
-        payload: { city: event.target.checked ? event.target.name : "" },
-      });
+      event.preventDefault();
+      updateSearch();
     },
-    [dispatch]
+    [updateSearch]
   );
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
 
   useEffect(() => {
-    if (city || fullTime || location) {
-      push(
-        `/search?${fullTime ? `full_time=${fullTime}` : ""}${
-          location || city
-            ? `${fullTime ? "&" : ""}location=${location || city}`
-            : ""
-        }`
-      );
+    if (fullTime) {
+      updateSearch();
     }
-  }, [city, fullTime, location, push]);
+  }, [fullTime, updateSearch]);
 
   return {
     cities,
-    city,
-    fullTime,
-    location,
-    handleChangeCity,
     handleChangeFullTime,
     handleChangeLocation,
     handleSubmit,
+    fullTime: fullTime === "true" || fullTime,
+    location,
   };
 }

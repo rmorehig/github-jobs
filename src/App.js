@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Home from "pages/Home";
-import { SearchProvider } from "context/SearchContext";
+import { SearchProvider } from "context/search";
 
 const Logo = styled(Link)`
   color: #282538;
@@ -21,10 +21,10 @@ function App() {
   return (
     <AppWrapper>
       <Router>
+        <Logo to="/">
+          <span>Github</span> Jobs
+        </Logo>
         <SearchProvider>
-          <Logo to="/">
-            <span>Github</span> Jobs
-          </Logo>
           <Switch>
             <Route exact path={["/", "/search"]}>
               <Home />
